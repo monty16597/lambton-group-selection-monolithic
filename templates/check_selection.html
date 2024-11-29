@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lambton College</title>
+    <style>
+        /* Add some basic styling to the interface */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #nav {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        #nav a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        #nav a:hover {
+            color: #666;
+        }
+
+        #content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #content>* {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <h1>Lambton College</h1>
+    </header>
+    <nav id="nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Programs</a></li>
+            <li><a href="#">Admissions</a></li>
+            <li><a href="#">Student Life</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div id="content">
+        <section>
+            <h2>Check Your Group Selection</h2>
+        </section>
+        <section>
+            <div id="form-container">
+                <form method="POST" action="/check_selection">
+                    <label for="student_id">Enter Your Student ID:</label><br>
+                    <input type="text" id="student_id" name="student_id" required><br>
+                    <button type="submit">Check Group</button>
+                </form>
+            </div>
+            
+            {% if selected_group %}
+            <div id="result">
+                <p><strong>Your Selected Group:</strong> {{ selected_group.group_id }}</p>
+            </div>
+            {% elif message %}
+            <div id="result">
+                <p>{{ message }}</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</body>
+
+</html>

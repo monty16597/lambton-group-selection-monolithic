@@ -1,0 +1,26 @@
+services:
+  db:
+    container_name: db
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_DATABASE=student_groups
+      - MYSQL_USER=lambton
+      - MYSQL_PASSWORD=admin123
+    ports:
+      - 3306:3306
+  app:
+    container_name: app
+    build: .
+    cpus: 0.2
+    mem_limit: 200m
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - 8080:8080
+    links:
+      - db
+    depends_on:
+      - db

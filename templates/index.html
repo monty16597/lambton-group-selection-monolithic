@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lambton College</title>
+    <style>
+        /* Add some basic styling to the interface */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #nav {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        #nav a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        #nav a:hover {
+            color: #666;
+        }
+
+        #content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #content>* {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <h1>Lambton College</h1>
+    </header>
+    <nav id="nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <div id="content">
+        <section>
+            <h2>Welcome to Lambton College</h2>
+            <p>Lambton College is a leading post-secondary institution in Ontario, Canada. We offer a wide range of
+                programs in fields such as business, technology, healthcare, and more.</p>
+        </section>
+        <section>
+            <h2>Group Selection</h2>
+            <p>As part of our commitment to providing a personalized learning experience, we are introducing a group
+                selection project. Please enter your Student ID and select a group from the options below:</p>
+            <form method="POST" action="/select">
+                <label for="student_id">Student ID:</label>
+                <input type="text" id="student_id" name="student_id" required><br><br>
+
+                <div id="group-selector">
+                    <table id="group-table">
+                        <thead>
+                            <tr>
+                                <th>Group ID</th>
+                                <th>Remaining Seats</th>
+                                <th>Choose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for group in groups %}
+                            <tr>
+                                <td>{{ group.group_id }}</td>
+                                <td>{{ group.remaining_seats }}</td>
+                                <td><input type="radio" name="group_id" value="{{ group.group_id }}" required></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <br><br>
+                    <button type="submit">Choose Group</button>
+                </div>
+            </form>
+
+            <a href="/check_selection">Check your group</a>
+        </section>
+    </div>
+</body>
+
+</html>
