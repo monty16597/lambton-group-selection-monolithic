@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 
 # Configure the database to use MySQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://lambton:admin123@db/student_groups'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'mysql://lambton:admin123@db/student_groups')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_POOL_TIMEOUT'] = 120
 
